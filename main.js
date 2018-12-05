@@ -42,21 +42,21 @@ class Calculator {
   setupListeners() {
     let numbers = document.getElementsByClassName("number");
     for (let i = 0; i < numbers.length; i++) {
-      numbers[i].addEventListener("click", (e) => { this.numberClicked(e); });
+      numbers[i].addEventListener("click", this.numberClicked.bind(this));
     }
 
     let ac = document.getElementById("all-clear");
-    ac.addEventListener("click", (e) => { this.acClicked(e); } );
+    ac.addEventListener("click", this.acClicked.bind(this));
 
     let equals = document.getElementById("equal-sign");
-    equals.addEventListener("click", (e) => { this.equalsClicked(e); } );
+    equals.addEventListener("click", this.equalsClicked.bind(this));
 
     let decimal = document.getElementById("decimal");
-    decimal.addEventListener("click", (e) => { this.decimalClicked(e); } );
+    decimal.addEventListener("click", this.decimalClicked.bind(this));
 
     let operators = document.getElementsByClassName("operator");
     for (let i = 0; i < operators.length; i++) {
-      operators[i].addEventListener("click", (e) => { this.operatorClicked(e); });
+      operators[i].addEventListener("click", this.operatorClicked.bind(this));
     }
   }
 
