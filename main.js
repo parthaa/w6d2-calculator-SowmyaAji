@@ -1,25 +1,41 @@
-function numberClicked(event) {
-//  alert("number clicked" + event.target.value);
-  var elem = screenElement();
-  elem.value = elem.value + event.target.value;
-}
-
-function screenElement() {
-  return document.getElementById("calculator-screen");
-}
-
-function acClicked(event) {
-  screenElement().value = "0";
-}
-
-function main() {
-  let numbers = document.getElementsByClassName("number");
-  for (let i = 0; i < numbers.length; i++) {
-    numbers[i].addEventListener("click", numberClicked);
+class Calculator {
+  screenElement() {
+    return document.getElementById("calculator-screen");
   }
 
-  let ac = document.getElementById("all-clear");
-  ac.addEventListener("click", acClicked);
+  acClicked(event) {
+    this.screenElement().value = "0";
+  }
+
+  operatorClicked(event) {
+
+  }
+
+  numberClicked(event) {
+    var elem = this.screenElement();
+    elem.value = elem.value + event.target.value;
+  }
+
+  setupListeners() {
+    let numbers = document.getElementsByClassName("number");
+    for (let i = 0; i < numbers.length; i++) {
+      numbers[i].addEventListener("click", (e) => { this.numberClicked(e); });
+    }
+
+    let ac = document.getElementById("all-clear");
+    ac.addEventListener("click", (e) => { this.acClicked(e); } );
+
+    let operators = document.getElementsByClassName("operator");
+    for (let i = 0; i < operators.length; i++) {
+      operators[i].addEventListener("click", (e) => { this.operatorClicked(e); });
+    }
+  }
+
+  main() {
+    this.setupListeners();
+  }
 }
 
-main()
+
+let calc = new Calculator();
+calc.main();
