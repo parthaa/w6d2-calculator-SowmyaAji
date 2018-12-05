@@ -27,6 +27,18 @@ class Calculator {
     elem.value = eval(elem.value);
   }
 
+  decimalClicked(event) {
+    let elem = this.screenElement();
+    let lastChar = elem.value.slice(-1);
+    if (elem.value === "0") {
+      elem.value = "0.";
+    } else if (isNaN(parseInt(lastChar, 10))) {
+      elem.value = elem.value + "0.";
+    } else {
+      elem.value = elem.value + event.target.value;
+    }
+  }
+
   setupListeners() {
     let numbers = document.getElementsByClassName("number");
     for (let i = 0; i < numbers.length; i++) {
@@ -38,6 +50,9 @@ class Calculator {
 
     let equals = document.getElementById("equal-sign");
     equals.addEventListener("click", (e) => { this.equalsClicked(e); } );
+
+    let decimal = document.getElementById("decimal");
+    decimal.addEventListener("click", (e) => { this.decimalClicked(e); } );
 
     let operators = document.getElementsByClassName("operator");
     for (let i = 0; i < operators.length; i++) {
